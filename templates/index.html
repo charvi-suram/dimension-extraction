@@ -1,0 +1,209 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image OCR</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Upload an Image</h1>
+        <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/x-icon" href="https://www.prepostseo.com/favicon.ico?v1.0">
+    <meta name="_token" content="QN6JkkZ1asylgZi9l9vnLjD7ouh77WfOdT6ti7aL" />
+    <title>Dimension Data Extraction</title>
+    <meta name="description"
+        content="Image to text converter by Prepostseo allows you to copy text from image, low-resolution photos, and scanned documents online with a single click." />
+    <link rel="canonical" href="https://www.prepostseo.com/image-to-text" />
+    <link rel="alternate" hreflang="x-default" href="https://www.prepostseo.com/image-to-text" />
+    <link rel="alternate" hreflang="en" href="https://www.prepostseo.com/image-to-text" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://www.prepostseo.com/web_assets/frontend/css/theme.css" rel="stylesheet">
+    <link href="https://www.prepostseo.com/web_assets/frontend/css/style.css?v2.2.3" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.prepostseo.com/web_assets/frontend/css/tools/image-to-text.css?v2.2.3">
+    <style>
+        .g-recaptcha {
+            margin: 0px auto !important;
+        }
+
+        .captcha-heading {
+            font-size: 19px;
+            padding: 9px;
+            color: #000000;
+            text-transform: capitalize;
+            font-weight: 500;
+            border-radius: 20px;
+        }
+
+        .captcha-model {
+            background: rgba(0, 0, 0, .4);
+            display: none;
+            height: 100%;
+            position: fixed;
+            text-align: center;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10000;
+        }
+
+        .captcha-model .helper-span {
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        .captcha-model>div {
+            background-color: #fff;
+            box-shadow: 10px 10px 60px #555;
+            display: inline-block;
+            padding: 0px !important;
+            height: auto;
+            max-height: 100%;
+            max-width: 360px;
+            min-width: 300px;
+            vertical-align: middle;
+            width: 50%;
+            position: relative;
+            border-radius: 20px;
+            padding: 0 0 40px;
+        }
+
+        .captcha-footer {
+            margin: 12px;
+        }
+
+        .no-www-warning {
+            background-color: #2b4258cf;
+            font-size: 1rem;
+            text-align: center;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="fw">
+        <div class="model-bg position-f w100k h100k d-none"></div>
+        <div class="model-box bg-white m-auto position-f noP o-hidden d-none h-auto">
+            <span class="model-heading bg-white w100k d-block black text-left p-3"></span>
+            <div class="model-body d-block text16 w100k p10px"></div>
+            <div class="line"></div>
+            <span class="close-model position-a text18 font700 cursor-p">X</span>
+            <div class="model-footer d-block text-white text-center w100k">
+                If you need any help, please
+                <a class="text-white text-underline" href="#" target="_blank">Contact us</a>
+            </div>
+        </div>
+        <script>
+            let isDarkMode = false;
+            const parts = document.cookie.split('; pps_dark_mode=');
+            if (parts.length === 2) {
+                isDarkMode = parseInt(parts.pop().split(";").shift());
+            }
+            if (isDarkMode) {
+                document.body.classList.add('dark_mode_ui');
+            }
+        </script>
+        <header>
+            <div class="header_wrapper bg-white d-flex mb-2">
+                <div class="main__left d-flex">
+                </div>
+                <!-- <div class="main__right d-flex">
+                    <a href="./login.html" class="logregBtn text-white float-right border-dark">Login</a>
+                    <a href="./register.html" class="logregBtn text-white float-right border-dark">Register</a>
+                    <button class="mobile-toggle-btn navbar-toggle collapsed position-r float-right bg-transparent"
+                        type="button" role="button">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div> -->
+            </div>
+        </header>
+
+        <!-- Add your Flask form here -->
+        <div class="container-fluid mt-3">
+            <div class="container noP tool-row">
+                <div class="col-md-12 shadowBox scrollToBox">
+                    <h1 class="h_tool">Dimension Data Extraction from Engineering Drawings</h1>
+                    <br>
+                    <p class="text16 text-center">
+                        The model extracts dimensional data from engineering drawings and provides the extracted text 
+                        along with precise bounding box coordinates for each detected region within images.
+                    </p>
+                    <!-- <div class="my-0 text-sec">
+                        <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
+                            <input type="file" name="file" accept="image/*" required>
+                            <button type="submit">Upload</button>
+                        </form> -->
+
+                        <div class="col-sm-12 main-ris-box">
+                            <div class="drag-zone custom-padding" ondragover="_ondragover(event)" ondrop="_ondrop(event)"
+                                ondragleave="_ondragleave(event)" ondragenter="_ondragenter(event)">
+                                <div id="overlay">
+                                    <div id="text"><i class="fa fa-spin fa-refresh"></i> Uploading Image..</div>
+                                </div>
+                                <span class="input-box">
+                                    <span class="svg_block">
+                                        <img src="https://www.prepostseo.com/web_assets/frontend/img/browse-btn.svg"
+                                            width="148" height="100" alt="uploader">
+                                    </span>
+                                    <span class="instUpload my-3">
+                                        <p>Drag &amp; Drop&nbsp;files or Upload </p>
+                                    </span>
+                                    <div class="text-center">
+                                        <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
+                                            <input type="file" name="file" accept="image/*" required>
+                                        <!-- <button type="button" class="browse-btn" id="uploadBtn">
+                                            <span data-title="Upload Image" class="dark-trans upload-font">
+                                                Upload 
+                                            </span>
+                                        </button> -->
+                                        <button type="submit" class="btn btn-outline-success">Upload</button>
+                                        
+                                
+                                        </form>
+                                    </div>
+                                    <span class="afterUpload my-3" style="display: none !important">
+                                        Drag & Drop files or <span class="upload-after cursor-pointer"
+                                            id="upload-after-btn">Upload</span> images here
+                                    </span>
+                            </div>
+                            <div class="toggleLabelName">
+                                <span id="fileName" style="clear:both; text-align:center !important; height:20px; margin-top:10px; display:none;"
+                                    data-toggle="tooltip" data-placement="top" data-original-title title></span>
+                            </div>
+                            <div class="inputurlplace hide">
+                                <div class="form-group" style="margin-bottom: 5px">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-link"></i></div>
+                                        <input form="filesForm" type="url" id="inputURL" name="url"
+                                            placeholder="Paste Link Here...." class="form-control green-border"
+                                            style="height:auto; padding:10px;" value autocomplete="off">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex info__wrapper" style="display: none;">
+                        <span>Uploaded Files (<span class="no_of_images"></span>)</span>
+                        <span onclick="startOver()" class="cursor-pointer">Clear All <i class="fa fa-trash"></i> </span>
+                    </div>
+                    <div id="mainPer"
+                        style="overflow: hidden;width: 100%;clear: both;padding-top:5px;padding-left:10px;display:none">
+                    </div>
+                    <div class="row px-15">
